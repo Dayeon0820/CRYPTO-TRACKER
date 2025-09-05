@@ -173,6 +173,7 @@ function Coin() {
   //     setLoading(false);
   //   })();
   // }, []);
+  //안녕
   const { isLoading: infoLoading, data: infoData } = useQuery<InfoData>({
     queryKey: ["info", coinId],
     queryFn: () => fetchCoinInfo(coinId),
