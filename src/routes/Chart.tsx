@@ -3,6 +3,7 @@ import { fetchCoinHistory } from "../api";
 import ApexChart from "react-apexcharts";
 import { useRecoilValue } from "recoil";
 import { isDarkAtom } from "../atoms";
+import dayjs from "dayjs";
 
 interface ChartProps {
   coinId: string;
@@ -31,48 +32,65 @@ function Chart({ coinId }: ChartProps) {
         "Loading chart..."
       ) : (
         <ApexChart
-          type="line"
+          type="candlestick"
           series={[
             {
-              name: "Price",
-              data: data?.map((price) => price.close) as number[],
+              data:
+                data?.map((price) => ({
+                  x: new Date(price.time_close).getTime(), // x축: 날짜
+                  y: [price.open, price.high, price.low, price.close], // 시가, 고가, 저가, 종가
+                })) ?? [],
             },
           ]}
           options={{
-            theme: {
-              mode: isDark ? "dark" : "light",
-            },
             chart: {
-              height: 300,
-              width: 500,
-              toolbar: {
-                show: false,
-              },
+              height: 350,
+              type: "candlestick",
               background: "transparent",
+              toolbar: { show: false },
             },
-            grid: { show: false },
-            stroke: {
-              curve: "smooth",
-              width: 4,
+
+            annotations: {
+              xaxis: [
+                {
+                  x: dayjs().format("MMM DD HH:mm"),
+                  borderColor: "#00E396",
+                  label: {
+                    borderColor: "#00E396",
+                    style: {
+                      fontSize: "12px",
+                      color: "#fff",
+                      background: "#00E396",
+                    },
+                    orientation: "horizontal",
+                    offsetY: 7,
+                    text: "Annotation Test",
+                  },
+                },
+              ],
             },
-            yaxis: {
-              show: false,
+            tooltip: {
+              enabled: false,
             },
             xaxis: {
-              axisBorder: { show: false },
-              axisTicks: { show: false },
-              labels: { show: false },
-              type: "datetime",
-              categories: data?.map((price) => price.time_close),
+              type: "category",
+              labels: {
+                formatter: (val: string) => dayjs(val).format("MMM DD HH:mm"),
+                style: {
+                  colors: isDark ? "#fff" : "#000000", // 라벨 전체 색상
+                  fontSize: "10px", // 글씨 크기
+                },
+              },
             },
-            fill: {
-              type: "gradient",
-              gradient: { gradientToColors: ["#0be881"], stops: [0, 100] },
-            },
-            colors: ["#0fbcf9"],
-            tooltip: {
-              y: {
-                formatter: (value) => `$${value.toFixed(2)}`,
+            yaxis: {
+              labels: {
+                style: {
+                  colors: isDark ? "#fff" : "#000000",
+                },
+              },
+
+              tooltip: {
+                enabled: false,
               },
             },
           }}

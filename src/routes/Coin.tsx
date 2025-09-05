@@ -22,6 +22,11 @@ const Header = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  a {
+    position: absolute;
+    left: 0;
+  }
 `;
 
 const Title = styled.h1`
@@ -42,7 +47,7 @@ interface RouteState {
 const Overview = styled.div`
   display: flex;
   justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${(props) => props.theme.overviewColor};
   padding: 10px 20px;
   border-radius: 10px;
 `;
@@ -135,7 +140,7 @@ const Tab = styled.span<{ isActive: boolean }>`
   text-transform: uppercase;
   font-size: 12px;
   font-weight: 400;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${(props) => props.theme.overviewColor};
   padding: 7px 0px;
   border-radius: 10px;
   color: ${(props) =>
@@ -187,9 +192,9 @@ function Coin() {
         </title>
       </Helmet>
       <Header>
-        <Link to={`/`}>&#8592;</Link>
         <Title>
-          코인
+          <Link to={`/`}>&#8592;</Link>
+
           {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
         </Title>
       </Header>

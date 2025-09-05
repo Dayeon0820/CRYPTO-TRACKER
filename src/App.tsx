@@ -6,6 +6,7 @@ import { ThemeProvider } from "styled-components";
 import { useState } from "react";
 import { darkTheme, lightTheme } from "./theme";
 import { useRecoilValue } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { isDarkAtom } from "./atoms";
 
 const GlobalStyle = createGlobalStyle`
@@ -71,13 +72,24 @@ const GlobalStyle = createGlobalStyle`
    color: inherit;
  }
  `;
-
+const ToggleBtn = styled.button`
+  position: absolute;
+  right: 20px;
+  background-color: ${(props) => props.theme.toggleBtnColor};
+  padding: 5px 10px;
+  color: ${(props) => props.theme.accentColor};
+  border: none;
+  margin: 20px 5px;
+`;
 function App() {
   const isDark = useRecoilValue(isDarkAtom);
+  const setDarkAtom = useSetRecoilState(isDarkAtom);
+  const toggleDarkAtom = () => setDarkAtom((prev) => !prev);
   return (
     <>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
         <GlobalStyle />
+        <ToggleBtn onClick={toggleDarkAtom}>Toggle Mode</ToggleBtn>
         <Router />
         <ReactQueryDevtools initialIsOpen={true} />
       </ThemeProvider>

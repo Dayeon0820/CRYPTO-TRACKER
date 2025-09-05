@@ -69,8 +69,6 @@ const Img = styled.img`
 `;
 
 function Coins() {
-  const setDarkAtom = useSetRecoilState(isDarkAtom);
-  const toggleDarkAtom = () => setDarkAtom((prev) => !prev);
   const { isLoading, data } = useQuery<CoinInterface[]>({
     queryKey: ["allCoins"],
     queryFn: fetchCoins,
@@ -89,11 +87,10 @@ function Coins() {
   return (
     <Container>
       <Helmet>
-        <title>코인</title>
+        <title>Coin Tracker</title>
       </Helmet>
       <Header>
-        <Title>코인</Title>
-        <button onClick={toggleDarkAtom}>Toggle Mode</button>
+        <Title>Coin Tracker</Title>
       </Header>
       {isLoading ? (
         <Loader>Loading . . . </Loader>
@@ -109,6 +106,7 @@ function Coins() {
               >
                 <Img
                   src={`https://cryptoicon-api.pages.dev/api/icon/${coin.symbol.toLowerCase()}`}
+                  onError={(e) => (e.currentTarget.src = "./logo192.png")} //이미지 로드에 실패하면 기본 이미지
                 />
                 {coin.name} &rarr;
               </Link>
