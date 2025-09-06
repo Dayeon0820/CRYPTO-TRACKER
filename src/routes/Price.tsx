@@ -8,6 +8,7 @@ import styled from "styled-components";
 
 interface PriceProps {
   coinId: string;
+  coinName?: string;
 }
 
 interface IHistorical {
@@ -48,7 +49,8 @@ const Overview = styled.div`
     font-size: 17px;
   }
 `;
-function Price({ coinId }: PriceProps) {
+function Price({ coinId, coinName }: PriceProps) {
+  console.log(coinName, "coinName");
   const isDark = useRecoilValue(isDarkAtom);
   const { isLoading, data } = useQuery<IHistorical[]>({
     queryKey: ["ohlcv", coinId],
@@ -111,7 +113,9 @@ function Price({ coinId }: PriceProps) {
           </OverviewGrid>
           <Overview>
             <span>24h Volume</span>
-            <span>{volume} XRP</span>
+            <span>
+              {volume} {coinName}
+            </span>
           </Overview>
         </>
       )}
