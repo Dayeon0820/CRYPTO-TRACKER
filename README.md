@@ -4,8 +4,8 @@
 
 <br>
 
-## 📸 스크린샷
-
+## 배포 URL
+[https://dayeon0820.github.io/CRYPTO-TRACKER/]
 
 
 <br>
@@ -35,7 +35,11 @@
 
 이 프로젝트는 단순히 기능을 구현하는 것을 넘어, **'왜' 이 기술을 사용하는지** 고민하며 개발했습니다.
 
+
+
 ---
+
+
 
 ### 1. 서버 상태 관리: `useEffect`에서 `React Query`로
 
