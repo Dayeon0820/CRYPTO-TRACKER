@@ -9,6 +9,12 @@
 
 
 <br>
+## 📸 스크린샷
+<img width="1915" height="664" alt="Image" src="https://github.com/user-attachments/assets/8d11e9ac-b508-413a-b974-0f27b5bf66e5" />
+<img width="1915" height="664" alt="Image" src="https://github.com/user-attachments/assets/ba17ce8d-9de4-4208-a4cd-dff483e8bfd1" />
+<img width="1915" height="664" alt="Image" src="https://github.com/user-attachments/assets/8377aecb-b9b8-47e1-ae83-fde83010ba34" />
+
+<br>
 
 ## ✨ 주요 기능
 
@@ -17,6 +23,7 @@
 * **가격 변동 차트:** ApexCharts 라이브러리를 이용한 시각화
 * **탭 기반 UI:** 상세 페이지 내 '차트', '가격' 탭 (Nested Routes)
 * **동적 페이지 타이틀:** `React Helmet`을 이용한 페이지별 `<title>` 동적 관리
+* * **테마 컬러 변경:** `ThemeProvider`을 이용한 테마 색상 관리 
 
 <br>
 
